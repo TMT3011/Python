@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sửa thông tin nhân sự</title>
+  </head>
+
+  <body>
+    <h2>Sửa thông tin nhân sự</h2>
+
+    <form id="editForm" enctype="multipart/form-data">
+      <div>
+        <label>Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <br />
+
+      <div>
+        <label>Tên:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <br />
+
+      <div>
+        <label>Giới tính:</label>
+
+        Nam
+        <input type="radio" name="gioitinh" value="Nam" />
+
+        Nữ
+        <input type="radio" name="gioitinh" value="Nu" />
+      </div>
+
+      <br />
+
+      <div>
+        <label>Trình độ:</label>
+
+        <select id="trinhdo" name="trinhdo">
+          <option value="Thạc sĩ">Thạc sĩ</option>
+          <option value="Tiến sĩ">Tiến sĩ</option>
+          <option value="Phó giáo sư">Phó giáo sư</option>
+          <option value="Giáo sư">Giáo sư</option>
+        </select>
+      </div>
+
+      <br />
+
+      <div>
+        <label>Đơn vị:</label>
+        <input type="text" id="donvi" name="donvi" />
+      </div>
+
+      <br />
+
+      <div>
+        <label>Học hàm:</label>
+        <input type="text" id="hocham" name="hocham" />
+      </div>
+
+      <br />
+
+      <div>
+        <label>Avatar:</label>
+        <input type="file" name="avatar" />
+      </div>
+
+      <br />
+
+      <div>
+        <button type="submit">Cập nhật</button>
+        <button type="reset">Hủy</button>
+      </div>
+    </form>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm nhân sự</title>
+  </head>
+  <body>
+    <h1>Thêm nhân sự</h1>
+    <form action="/add_user" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Thêm Nhân Sự</legend>
+        <div>Email: <input type="email" name="email" required /></div>
+        <div>Tên: <input type="text" name="name" required /></div>
+        Giới tính: Nam<input
+          type="radio"
+          name="gioitinh"
+          value="male"
+          required
+        />
+        Nữ <input type="radio" name="gioitinh" value="female" /><br />
+        <div>
+          Trình độ:
+          <select name="trinhdo">
+            <option value="thacsi">Thạc sĩ</option>
+            <option value="tiensi">Tiến sĩ</option>
+            <option value="phogiaosu">Phó giáo sư</option>
+            <option value="giaosu">Giáo sư</option>
+          </select>
+        </div>
+        <div>Đơn vi: <input type="text" name="donvi" /></div>
+        <div>Học hàm:<input type="text" name="hocham" /></div>
+        <div>Avatar: <input type="file" name="hinhanh" required /></div>
+        <div>
+          <input type="submit" value="Thêm" />
+          <input type="reset" value="Hủy" />
+        </div>
+      </fieldset>
+    </form>
+  </body>
+</html>
