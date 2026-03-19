@@ -10,3 +10,10 @@ class DetailInfoNhanSu(BaseModel):
     hocham: Optional[str]
     class Config:
         form_attributes = True
+class GeneralInfoNhanSu(BaseModel):
+    id: int
+    hoten: str
+    email: EmailStr
+    donvi: str
+    class Config:
+        form_attributes = True

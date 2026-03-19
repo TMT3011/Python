@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from database import get_db
+from typing import List
 from models.nhansu import NhanSu_Info, NhanSu_Image, GioiTinh, TrinhDo
-from schemas.nhansu import DetailInfoNhanSu
+from schemas.nhansu import DetailInfoNhanSu, GeneralInfoNhanSu
 
 router = APIRouter()
 
+#Lấy thông tin chi tiết của một nhân sự
 @router.get("/detail_info", response_model=DetailInfoNhanSu)
 async def get_detail_nhansu(
     id: int,
@@ -34,7 +36,35 @@ async def get_detail_nhansu(
         except Exception as e:
             await db.rollback()
             raise HTTPException(status_code=400, detail=f"Lỗi hệ thống: {str(e)}")
+#Lấy danh sách thông tin tổng quát các nhân sự
+@router.get("/general_info", response_model=List[GeneralInfoNhanSu])
+async def get_general_nhansu(
+    db = Depends(get_db)
+):
+    async with db.cursor() as cur:
+        try:
+            sql = "SELECT id, hoten, email, donvi FROM nhansu_info"
+            await cur.execute(sql)
+            rows = await cur.fetchall()
+            
+            if not rows:
+                return []
 
+            result = []
+            for row in rows:
+                result.append({
+                    "id": row[0],
+                    "hoten": row[1],
+                    "email": row[2],
+                    "donvi": row[3]
+                })
+            
+            return result
+
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Lỗi hệ thống: {str(e)}")
+
+#Tải lên thông tin nhân sự mới
 @router.post("/upload")
 async def upload_nhansu(
     hoten: str = Form(...),
@@ -70,6 +100,8 @@ async def upload_nhansu(
         except Exception as e:
             await db.rollback()
             raise HTTPException(status_code=400, detail=f"Lỗi hệ thống: {str(e)}")
+        
+#Cập nhật thông tin nhân sự
 @router.post("/update")
 async def update_nhansu(
     id: int, 
