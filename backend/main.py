@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.user import router as user_router
+from routers.nhansu import router as nhansu_router
 
 app = FastAPI()
 # origins = [
@@ -17,3 +18,4 @@ app.add_middleware(
 )
 
 app.include_router(user_router, prefix="/user")
+app.include_router(nhansu_router, prefix="/nhansu")
