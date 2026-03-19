@@ -144,3 +144,23 @@ async def update_nhansu(
         except Exception as e:
             await db.rollback()
             raise HTTPException(status_code=400, detail=f"Lỗi cập nhật: {str(e)}")
+        
+#Xóa nhân sự
+@router.delete("/delete")
+async def delete_nhansu(
+    id: int,
+    db = Depends(get_db)
+):
+    async with db.cursor() as cur:
+        try:
+            #Kiểm tra nhân sự có tồn tại không
+            await cur.execute("SELECT id FROM nhansu_info WHERE id = %s", (id,))
+            if not await cur.fetchone():
+                raise HTTPException(status_code=404, detail="Không tìm thấy nhân sự để xóa")
+            sql = "DELETE FROM nhansu_info WHERE id = %s"
+            await cur.execute(sql, (id,))
+            await db.commit()
+            return {"msg": f"Xóa nhân sự có ID {id} thành công"}
+        except Exception as e:
+            await db.rollback()
+            raise HTTPException(status_code=400, detail=f"Lỗi cập nhật: {str(e)}")
