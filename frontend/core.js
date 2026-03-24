@@ -2,6 +2,24 @@ const { use } = require("react");
 
 const API = "http://127.0.0.1:8000/users";
 
+async function uploadNhanSu(event) {
+  event.preventDefault(); 
+  const formData = new FormData(event.target);
+
+  try {
+      const res = await axios.post('http://127.0.0.1:8000/nhansu/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+      });
+          
+      alert(res.data.msg);
+      event.target.reset();
+  } catch (err) {
+      console.error(err);
+      const detail = err.response?.data?.detail;
+      alert("Lỗi: " + JSON.stringify(detail));
+    }
+}
+
 function getUserId() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
@@ -33,6 +51,8 @@ async function loadListUser() {
   });
 }
 
+
+
 async function loadUser() {
   const id = getUserId();
   if (!id) return;
@@ -48,6 +68,7 @@ async function loadUser() {
 
   document.getElementById("avatar").src = user.hinhanh;
 }
+
 
 async function deleteUser(id) {
   if (!confirm("Xóa nhân sự này?")) return;

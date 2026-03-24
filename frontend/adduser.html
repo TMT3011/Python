@@ -7,18 +7,17 @@
   </head>
   <body>
     <h1>Thêm nhân sự</h1>
-    <form action="/add_user" method="post" enctype="multipart/form-data">
+    <form id="nhansuForm" onsubmit="uploadNhanSu(event)">
       <fieldset>
         <legend>Thêm Nhân Sự</legend>
-        <div>Email: <input type="email" name="email" required /></div>
-        <div>Tên: <input type="text" name="name" required /></div>
-        Giới tính: Nam<input
-          type="radio"
-          name="gioitinh"
-          value="male"
-          required
-        />
-        Nữ <input type="radio" name="gioitinh" value="female" /><br />
+        
+        <div>Tên: <input type="text" name="hoten" id="name" required /></div>
+        <div>Email: <input type="email" name="email" id="email" required /></div>
+        
+        Giới tính: 
+        Nam <input type="radio" name="gioitinh" value="male" checked />
+        Nữ <input type="radio" name="gioitinh" value="female" />
+        
         <div>
           Trình độ:
           <select name="trinhdo">
@@ -28,14 +27,19 @@
             <option value="giaosu">Giáo sư</option>
           </select>
         </div>
-        <div>Đơn vi: <input type="text" name="donvi" /></div>
-        <div>Học hàm:<input type="text" name="hocham" /></div>
-        <div>Avatar: <input type="file" name="hinhanh" required /></div>
+        
+        <div>Đơn vị: <input type="text" name="donvi" /></div>
+        <div>Học hàm: <input type="text" name="hocham" /></div>
+        
+        <div>Avatar: <input type="file" name="file" required /></div>
+        
         <div>
-          <input type="submit" value="Thêm" />
-          <input type="reset" value="Hủy" />
+          <button type="submit">Thêm</button>
+          <button type="reset">Hủy</button>
         </div>
       </fieldset>
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="core.js"></script>
   </body>
 </html>
