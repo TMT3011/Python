@@ -14,6 +14,9 @@ async def login(
         await cur.execute(query, (user.email, user.matkhau)) 
         res = await cur.fetchone()
         if res:
-            return {"status": "success"}
+            return {
+                "detail": "Đăng nhập thành công",
+                "name": res[1]
+            }
         else:
             raise HTTPException(status_code=401, detail="Email hoặc mật khẩu không đúng")

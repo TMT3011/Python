@@ -1,5 +1,37 @@
 const API = "http://127.0.0.1:8000";
 
+async function loginUser(event) {
+    event.preventDefault();
+    
+    email = document.getElementById("email").value;
+    matkhau = document.getElementById("password").value;
+
+    bodyData = {
+        email: email,
+        matkhau: matkhau
+    }
+    try{
+        const res = await fetch(
+            'http://127.0.0.1:8000/user/login',{
+                method: 'POST',
+                body: JSON.stringify(bodyData),
+                headers: { 'Content-type': 'application/json; charset=UTF-8' }
+            }
+        )
+        const data = await res.json()
+        if (res.ok) {
+            alert(data.detail);
+            localStorage.setItem("user", data.name)
+            window.location.href="listUser.html"
+        } else {
+            alert("Lỗi: " + data.detail);
+        }
+    }
+    catch(err){
+        console.error(err.detail)
+    }
+}
+
 async function uploadNhanSu(event) {
   event.preventDefault();
   const formData = new FormData(event.target);

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
+        form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 300px; }
+        div { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <form method="POST" enctype="application/x-www-form-urlencoded" onsubmit="loginUser(event)">
+        <h2>Đăng nhập</h2>
+        
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Vui lòng nhập email" required>
+        </div>
+
+        <div>
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
+        </div>
+
+        <button type="submit">Đăng nhập</button>
+    </form>
+
+    <script src="core.js"></script>
+</body>
+</html>
