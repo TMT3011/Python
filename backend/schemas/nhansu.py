@@ -15,5 +15,6 @@ class GeneralInfoNhanSu(BaseModel):
     hoten: str
     email: EmailStr
     donvi: str
+    image_data: Optional[str]
     class Config:
         form_attributes = True

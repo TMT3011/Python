@@ -3,8 +3,10 @@ from database import get_db
 from typing import List
 from models.nhansu import NhanSu_Info, NhanSu_Image, GioiTinh, TrinhDo
 from schemas.nhansu import DetailInfoNhanSu, GeneralInfoNhanSu
-
+import base64
 router = APIRouter()
+
+
 
 #Lấy thông tin chi tiết của một nhân sự
 @router.get("/detail_info", response_model=DetailInfoNhanSu)
@@ -36,14 +38,13 @@ async def get_detail_nhansu(
         except Exception as e:
             await db.rollback()
             raise HTTPException(status_code=400, detail=f"Lỗi hệ thống: {str(e)}")
-#Lấy danh sách thông tin tổng quát các nhân sự
+
+#Lấy danh sách thông tin tong quat của một nhân sự
 @router.get("/general_info", response_model=List[GeneralInfoNhanSu])
-async def get_general_nhansu(
-    db = Depends(get_db)
-):
+async def get_general_nhansu(db = Depends(get_db)):
     async with db.cursor() as cur:
         try:
-            sql = "SELECT id, hoten, email, donvi FROM nhansu_info"
+            sql = "SELECT id, hoten, email, donvi, image_data FROM nhansu_info, nhansu_image WHERE nhansu_info.id = nhansu_image.nhansu_id;"
             await cur.execute(sql)
             rows = await cur.fetchall()
             
@@ -52,17 +53,27 @@ async def get_general_nhansu(
 
             result = []
             for row in rows:
+                binary_data = row[4]
+                base64_str = None
+                
+                if binary_data:
+                    encoded_string = base64.b64encode(binary_data).decode('utf-8')
+                    base64_str = f"data:image/jpeg;base64,{encoded_string}"
+
                 result.append({
                     "id": row[0],
                     "hoten": row[1],
                     "email": row[2],
-                    "donvi": row[3]
+                    "donvi": row[3],
+                    "image_data": base64_str
                 })
             
             return result
 
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Lỗi hệ thống: {str(e)}")
+
+
 
 #Tải lên thông tin nhân sự mới
 @router.post("/upload")
@@ -127,7 +138,7 @@ async def update_nhansu(
                 SET hoten=%s, email=%s, gioitinh=%s, trinhdo=%s, donvi=%s, hocham=%s
                 WHERE id=%s
             """
-            await cur.execute(sql_update_info, (hoten, email, gioitinh, trinhdo, donvi, hocham, id))
+            await cur.execute(sql_update_info, (hoten, email, gioitinh.value, trinhdo.value, donvi, hocham, id))
             
             if file:
                 image_bytes = await file.read()
