@@ -1,35 +1,32 @@
 const API = "http://127.0.0.1:8000";
 
 async function loginUser(event) {
-    event.preventDefault();
-    
-    email = document.getElementById("email").value;
-    matkhau = document.getElementById("password").value;
+  event.preventDefault();
 
-    bodyData = {
-        email: email,
-        matkhau: matkhau
+  email = document.getElementById("email").value;
+  matkhau = document.getElementById("password").value;
+
+  bodyData = {
+    email: email,
+    matkhau: matkhau,
+  };
+  try {
+    const res = await fetch("http://127.0.0.1:8000/user/login", {
+      method: "POST",
+      body: JSON.stringify(bodyData),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    const data = await res.json();
+    if (res.ok) {
+      alert(data.detail);
+      localStorage.setItem("user", data.name);
+      window.location.href = "listUser.html";
+    } else {
+      alert("Lỗi: " + data.detail);
     }
-    try{
-        const res = await fetch(
-            'http://127.0.0.1:8000/user/login',{
-                method: 'POST',
-                body: JSON.stringify(bodyData),
-                headers: { 'Content-type': 'application/json; charset=UTF-8' }
-            }
-        )
-        const data = await res.json()
-        if (res.ok) {
-            alert(data.detail);
-            localStorage.setItem("user", data.name)
-            window.location.href="listUser.html"
-        } else {
-            alert("Lỗi: " + data.detail);
-        }
-    }
-    catch(err){
-        console.error(err.detail)
-    }
+  } catch (err) {
+    console.error(err.detail);
+  }
 }
 
 async function uploadNhanSu(event) {
@@ -72,17 +69,36 @@ async function loadListUser() {
     };
 
     row.innerHTML = `
-    <td><img src="${user.image_data}" width="100"/></td>
+    <td><img src="${user.image_data}" width="50"/></td>
     <td>${user.hoten}</td>
     <td>${user.email}</td>
     <td>${user.donvi}</td>
     <td>
-        <span onclick="event.stopPropagation(); editUser()">Edit</span>
+        <button onclick="event.stopPropagation(); editUser(${user.id})">Edit</button>
     </td>
     <td>
-        <span onclick="event.stopPropagation(); deleteUser(${user.id})">X</span>
+        <button onclick="event.stopPropagation(); deleteUser(${user.id})">X</button>
     </td>`;
     container.appendChild(row);
+  });
+}
+
+async function loadList() {
+  const response = await fetch("http://127.0.0.1:8000/nhansu/general_info");
+  const users = await response.json();
+
+  const container = document.getElementById("list");
+  users.forEach((user) => {
+    const div = document.createElement("div");
+    div.classList.add("card");
+    div.innerHTML = `
+    <img src="${user.image_data}" width="100"/>
+    <div class="card-content">
+      <h3>${user.hoten}</h3>
+      <p class="email">${user.email}</p>
+      <p>Đơn vị: ${user.donvi}</p>
+    </div>`;
+    container.appendChild(div);
   });
 }
 
@@ -111,9 +127,9 @@ async function deleteUser(id) {
   window.location.reload();
 }
 
-function editUser() {
+function editUser(id) {
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  // const id = params.get("id");
 
   window.location.href = "editProfile.html?id=" + id;
 }

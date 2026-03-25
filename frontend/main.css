@@ -1,0 +1,85 @@
+/* Container bao quanh tất cả các card */
+.container {
+  display: flex; /* Kích hoạt chế độ dàn hàng ngang */
+  flex-direction: row; /* Ép các con nằm theo hàng */
+  flex-wrap: wrap; /* Tự động xuống hàng khi màn hình hẹp (mobile) */
+  gap: 25px; /* Khoảng cách giữa các thẻ */
+  justify-content: center; /* Căn giữa các thẻ trong container */
+  padding: 30px;
+  background-color: #f9f9f9; /* Màu nền nhẹ để nổi bật các card trắng */
+}
+
+/* Định dạng cho từng thẻ Card */
+.card {
+  width: 300px; /* Độ rộng cố định cho mỗi thẻ */
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px; /* Bo góc hiện đại hơn */
+  overflow: hidden; /* Cắt ảnh thừa để tuân theo bo góc */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng mịn */
+  transition: transform 0.3s ease; /* Hiệu ứng khi di chuột vào */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hiệu ứng bay lên khi di chuột vào card */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Định dạng ảnh giảng viên */
+.card img {
+  width: 100%;
+  height: 280px; /* Chiều cao cố định cho ảnh */
+  object-fit: cover; /* Giữ tỉ lệ ảnh không bị méo */
+  border-bottom: 1px solid #eee;
+}
+
+/* Phần nội dung chữ bên dưới ảnh */
+.card-content {
+  padding: 20px;
+  text-align: left; /* Căn lề trái cho nội dung chi tiết */
+}
+
+/* Tên giảng viên */
+.card-content h3 {
+  color: #1a4d8c; /* Màu xanh đậm đặc trưng */
+  font-size: 1.25rem;
+  margin: 0 0 10px 0;
+  text-align: center; /* Riêng tên thì căn giữa cho nổi bật */
+}
+
+/* Các dòng thông tin (Email, Đơn vị, Bộ môn) */
+.card-content p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 8px 0;
+  color: #444;
+}
+
+/* Link email */
+.card-content .email {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card-content .email:hover {
+  text-decoration: underline;
+}
+
+/* Nhãn in đậm (Hướng NC, Môn GD) */
+.card-content strong {
+  color: #333;
+}
+
+/* Responsive cho màn hình điện thoại cực nhỏ */
+@media (max-width: 350px) {
+  .card {
+    width: 100%; /* Full màn hình nếu điện thoại quá bé */
+  }
+}
