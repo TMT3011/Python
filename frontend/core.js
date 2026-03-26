@@ -69,9 +69,9 @@ async function loadListUser() {
   users.forEach((user) => {
     const row = document.createElement("tr");
 
-    row.onclick = function () {
-      window.location.href = "profileuser.html?id=" + user.id;
-    };
+    // row.onclick = function () {
+    //   window.location.href = "profileuser.html?id=" + user.id;
+    // };
 
     row.innerHTML = `
     <td><img src="${user.image_data}" width="50"/></td>
@@ -96,6 +96,9 @@ async function loadList() {
   const container = document.getElementById("list");
   users.forEach((user) => {
     const div = document.createElement("div");
+    div.onclick = function () {
+      window.location.href = "profileuser.html?id=" + user.id;
+    };
     div.classList.add("card");
     div.innerHTML = `
     <img src="${user.image_data}" width="100"/>
@@ -135,6 +138,7 @@ async function loadUser() {
   document.getElementById("trinhdo").innerText = trinhdo;
   document.getElementById("donvi").innerText = user.donvi;
   document.getElementById("hocham").innerText = user.hocham;
+  checkLogin();
 }
 
 async function deleteUser(id) {
@@ -194,7 +198,7 @@ async function updateUser(event) {
 
   alert("Cập nhật thành công");
 
-  window.location.href = "profileuser.html?id=" + id;
+  window.location.href = "quanly.html";
 }
 
 window.onload = function () {
@@ -226,6 +230,7 @@ function isLogin() {
   if (user) {
     document.getElementById("islogin").innerHTML =
       `<span>${localStorage.getItem("user")}</span>
+      <button><a href="quanly.html">Quản lý</a></button>
       <button onclick="logout()">Đăng xuất</button>`;
   }
 }
