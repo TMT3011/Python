@@ -5,6 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thông tin nhân sự</title>
     <script src="core.js"></script>
+    <style>
+      /* Thiết lập chung cho font chữ và nền */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f7f6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      /* Tiêu đề chính */
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Khung chứa thông tin */
+      #thongtin {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        transition: transform 0.3s ease;
+      }
+
+      #thongtin:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Định dạng các dòng thông tin */
+      #thongtin p {
+        margin: 15px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+        color: #555;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Nhãn (Email, Tên,...) */
+      #thongtin b {
+        color: #34495e;
+        min-width: 100px;
+      }
+
+      /* Nội dung hiển thị từ JS */
+      #thongtin span {
+        color: #2980b9;
+        font-weight: 500;
+        text-align: right;
+      }
+
+      /* Định dạng nút quay lại */
+      button {
+        margin-top: 25px;
+        background-color: #34495e;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #2c3e50;
+      }
+
+      button a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      /* Xóa gạch chân mặc định của link */
+      a {
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body onload="loadUser()">
     <h1>Thông tin nhân sự</h1>

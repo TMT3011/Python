@@ -4,6 +4,158 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thêm nhân sự</title>
+    <style>
+      /* Reset cơ bản */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f4f7f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        color: #333;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        color: #2c3e50;
+        text-transform: uppercase;
+        font-size: 24px;
+      }
+
+      /* Container cho Form */
+      #nhansuForm {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      fieldset {
+        border: none;
+      }
+
+      legend {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+        width: 100%;
+      }
+
+      /* Các hàng trong form */
+      #nhansuForm div {
+        margin-bottom: 15px;
+      }
+
+      label,
+      .label-text {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      /* Input, Select, File */
+      input[type="text"],
+      input[type="email"],
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+      }
+
+      /* Tùy chỉnh input file */
+      input[type="file"] {
+        padding: 5px 0;
+        font-size: 13px;
+      }
+
+      /* Radio buttons */
+      input[type="radio"] {
+        margin-left: 10px;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+
+      /* Buttons */
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      button[type="submit"] {
+        background-color: #27ae60;
+        color: white;
+        flex: 2;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #219150;
+      }
+
+      button[type="reset"] {
+        background-color: #e74c3c;
+        color: white;
+        flex: 1;
+      }
+
+      button[type="reset"]:hover {
+        background-color: #c0392b;
+      }
+
+      /* Nút Trang chủ phía dưới */
+      .home-btn {
+        margin-top: 20px;
+        background: transparent;
+        border: 1px solid #3498db;
+        padding: 0; /* Để thẻ a phủ kín */
+      }
+
+      .home-btn a {
+        display: block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: #3498db;
+      }
+
+      .home-btn:hover {
+        background-color: #3498db;
+      }
+
+      .home-btn:hover a {
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <h1>Thêm nhân sự</h1>
@@ -35,13 +187,13 @@
 
         <div>Avatar: <input type="file" name="file" required /></div>
 
-        <div>
+        <div class="button-group">
           <button type="submit">Thêm</button>
           <button type="reset">Hủy</button>
         </div>
       </fieldset>
     </form>
-    <button><a href="quanly.html">Trang chủ</a></button>
+    <button class="home-btn"><a href="quanly.html">Trang chủ</a></button>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="core.js"></script>
   </body>

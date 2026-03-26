@@ -3,6 +3,115 @@
   <head>
     <meta charset="UTF-8" />
     <title>Sửa thông tin nhân sự</title>
+    <style>
+      /* 1. Bao quát toàn bộ trang */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+        margin: 0;
+      }
+
+      h2 {
+        color: #1a73e8;
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+
+      /* 2. Thiết kế khung Form */
+      #editForm {
+        background: #ffffff;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      /* 3. Bố cục từng dòng trong Form */
+      #editForm div {
+        margin-bottom: 18px;
+      }
+
+      /* 4. Định dạng nhãn (Label) */
+      #editForm label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #444;
+      }
+
+      /* 5. Định dạng các ô nhập liệu (Input, Select) */
+      #editForm input[type="text"],
+      #editForm input[type="email"],
+      #editForm select,
+      #editForm input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box; /* Giúp padding không làm tràn chiều rộng */
+        font-size: 14px;
+        transition: border-color 0.3s;
+      }
+
+      #editForm input:focus,
+      #editForm select:focus {
+        border-color: #1a73e8;
+        outline: none;
+        box-shadow: 0 0 5px rgba(26, 115, 232, 0.2);
+      }
+
+      /* 6. Định dạng Radio Button (Giới tính) */
+      #editForm input[type="radio"] {
+        margin-right: 15px;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+
+      /* 7. Khu vực nút bấm */
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      #editForm button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: opacity 0.3s;
+      }
+
+      /* Nút Cập nhật */
+      #editForm button[type="submit"] {
+        background-color: #28a745;
+        color: white;
+      }
+
+      /* Nút Hủy */
+      #editForm button:has(a) {
+        background-color: #6c757d;
+        padding: 0; /* Để thẻ <a> chiếm trọn diện tích */
+      }
+
+      #editForm button a {
+        display: block;
+        padding: 12px;
+        color: white;
+        text-decoration: none;
+      }
+
+      #editForm button:hover {
+        opacity: 0.85;
+      }
+    </style>
   </head>
   <script src="core.js"></script>
   <body onload="loadUserToEdit()">
