@@ -138,7 +138,6 @@ async function loadUser() {
   document.getElementById("trinhdo").innerText = trinhdo;
   document.getElementById("donvi").innerText = user.donvi;
   document.getElementById("hocham").innerText = user.hocham;
-  checkLogin();
 }
 
 async function deleteUser(id) {
