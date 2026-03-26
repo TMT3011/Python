@@ -140,7 +140,7 @@ async def update_nhansu(
             """
             await cur.execute(sql_update_info, (hoten, email, gioitinh.value, trinhdo.value, donvi, hocham, id))
             
-            if file:
+            if file.filename:
                 image_bytes = await file.read()
                 sql_update_img = """
                     UPDATE nhansu_image 

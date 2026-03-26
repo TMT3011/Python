@@ -20,7 +20,7 @@ async function loginUser(event) {
     if (res.ok) {
       alert(data.detail);
       localStorage.setItem("user", data.name);
-      window.location.href = "listUser.html";
+      window.location.href = "quanly.html";
     } else {
       alert("Lỗi: " + data.detail);
     }
@@ -44,6 +44,7 @@ async function uploadNhanSu(event) {
 
     alert(res.data.msg);
     event.target.reset();
+    window.location.href = "quanly.html";
   } catch (err) {
     console.error(err);
     const detail = err.response?.data?.detail;
@@ -81,6 +82,7 @@ async function loadListUser() {
     </td>`;
     container.appendChild(row);
   });
+  checkLogin();
 }
 
 async function loadList() {
@@ -182,3 +184,18 @@ window.onload = function () {
     document.getElementById("editForm").addEventListener("submit", updateUser);
   }
 };
+
+function checkLogin() {
+  const user = localStorage.getItem("user");
+
+  if (!user) {
+    alert("Bạn chưa đăng nhập");
+    window.location.href = "listUser.html";
+  }
+}
+
+function logout() {
+  localStorage.removeItem("user");
+  alert("Đã đăng xuất");
+  window.location.href = "listUser.html";
+}
