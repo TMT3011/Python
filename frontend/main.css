@@ -83,3 +83,12 @@
     width: 100%; /* Full màn hình nếu điện thoại quá bé */
   }
 }
+.bar {
+  text-align: right;
+}
+.quanlybar {
+  padding: 10px;
+}
+
+table {
+}

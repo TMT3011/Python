@@ -1,3 +1,6 @@
+const { is } = require("core-js/core/object");
+const { use } = require("react");
+
 const API = "http://127.0.0.1:8000";
 
 async function loginUser(event) {
@@ -20,7 +23,8 @@ async function loginUser(event) {
     if (res.ok) {
       alert(data.detail);
       localStorage.setItem("user", data.name);
-      window.location.href = "quanly.html";
+      window.location.href = "index.html";
+      isLogin();
     } else {
       alert("Lỗi: " + data.detail);
     }
@@ -102,6 +106,7 @@ async function loadList() {
     </div>`;
     container.appendChild(div);
   });
+  isLogin();
 }
 
 async function loadUser() {
@@ -110,10 +115,24 @@ async function loadUser() {
   const res = await fetch("http://127.0.0.1:8000/nhansu/detail_info?id=" + id);
   const user = await res.json();
 
+  let gt = "";
+  let trinhdo = "";
+  if (user.gioitinh == "male") {
+    gt = "Nam";
+  } else gt = "Nữ";
+
+  if (user.trinhdo == "thacsi") {
+    trinhdo = "Thạc sĩ";
+  } else if (user.trinhdo == "tiensi") {
+    trinhdo = "Tiến sĩ";
+  } else if (user.trinhdo == "giaosu") {
+    trinhdo = "Giáo sư";
+  } else trinhdo = "Phó giáo sư";
+
   document.getElementById("email").innerText = user.email;
   document.getElementById("name").innerText = user.hoten;
-  document.getElementById("gioitinh").innerText = user.gioitinh;
-  document.getElementById("trinhdo").innerText = user.trinhdo;
+  document.getElementById("gioitinh").innerText = gt;
+  document.getElementById("trinhdo").innerText = trinhdo;
   document.getElementById("donvi").innerText = user.donvi;
   document.getElementById("hocham").innerText = user.hocham;
 }
@@ -190,12 +209,23 @@ function checkLogin() {
 
   if (!user) {
     alert("Bạn chưa đăng nhập");
-    window.location.href = "listUser.html";
+    window.location.href = "index.html";
+  } else {
+    isLogin();
   }
 }
 
 function logout() {
   localStorage.removeItem("user");
   alert("Đã đăng xuất");
-  window.location.href = "listUser.html";
+  window.location.href = "index.html";
+}
+
+function isLogin() {
+  const user = localStorage.getItem("user");
+  if (user) {
+    document.getElementById("islogin").innerHTML =
+      `<span>${localStorage.getItem("user")}</span>
+      <button onclick="logout()">Đăng xuất</button>`;
+  }
 }

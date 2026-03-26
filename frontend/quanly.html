@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quản lý nhân sự</title>
     <script src="core.js"></script>
+    <link rel="stylesheet" href="main.css" />
   </head>
   <body onload="loadListUser()">
-    <h1>Quản lý nhân sự</h1>
-    <h2>Danh sách nhân sự</h2>
-    <table id="list_user">
+    <h1>QUẢN LÝ NHÂN SỰ</h1>
+    <h2>DANH SÁCH NHÂN SỰ</h2>
+    <div class="quanlybar">
+      <button><a href="adduser.html">Thêm nhân sự</a></button>
+      <button><a href="index.html">Trang chủ</a></button>
+    </div>
+    <table id="list_user" border="1">
       <th>Avatar</th>
       <th>Tên</th>
       <th>Email</th>
@@ -17,10 +22,5 @@
       <th></th>
       <th></th>
     </table>
-    <div>
-      <button><a href="adduser.html">Thêm nhân sự</a></button>
-    </div>
-    <button><a href="listUser.html">List</a></button>
-    <button onclick="logout()">Đăng xuất</button>
   </body>
 </html>
